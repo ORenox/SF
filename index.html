@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abeja y Girasol</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #cce7ff;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      width: 100%;
+      padding: 20px;
+      background: #ffd54f;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+      color: #4e342e;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .abeja {
+      position: absolute;
+      left: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      background: yellow;
+      border-radius: 50%;
+      border: 3px solid black;
+      animation: vuelo 5s linear forwards;
+      animation-play-state: paused;
+    }
+    .abeja::before, .abeja::after {
+      content: "";
+      position: absolute;
+      top: -20px;
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+    }
+    .abeja::before {
+      left: 0;
+    }
+    .abeja::after {
+      right: 0;
+    }
+    .ojo {
+      position: absolute;
+      top: 15px;
+      width: 10px;
+      height: 10px;
+      background: black;
+      border-radius: 50%;
+    }
+    .ojo.izquierdo {
+      left: 15px;
+    }
+    .ojo.derecho {
+      right: 15px;
+    }
+
+    @keyframes vuelo {
+      0% { left: -80px; }
+      100% { left: calc(50% - 30px); }
+    }
+
+    .flor {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+      height: 320px;
+      opacity: 0;
+      transition: opacity 1s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .flor .cabeza {
+      position: relative;
+      width: 150px;
+      height: 150px;
+    }
+    .flor .petalo {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: orange;
+      border-radius: 50%;
+      top: 45px;
+      left: 45px;
+      transform-origin: center;
+    }
+    .flor .petalo:nth-child(1) { transform: rotate(0deg) translate(70px); }
+    .flor .petalo:nth-child(2) { transform: rotate(45deg) translate(70px); }
+    .flor .petalo:nth-child(3) { transform: rotate(90deg) translate(70px); }
+    .flor .petalo:nth-child(4) { transform: rotate(135deg) translate(70px); }
+    .flor .petalo:nth-child(5) { transform: rotate(180deg) translate(70px); }
+    .flor .petalo:nth-child(6) { transform: rotate(225deg) translate(70px); }
+    .flor .petalo:nth-child(7) { transform: rotate(270deg) translate(70px); }
+    .flor .petalo:nth-child(8) { transform: rotate(315deg) translate(70px); }
+    .flor .centro {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: brown;
+      border-radius: 50%;
+      top: 45px;
+      left: 45px;
+    }
+    .flor .tallo {
+      width: 20px;
+      height: 100px;
+      background: green;
+      margin-top: -10px;
+      border-radius: 10px;
+    }
+    .mensaje {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #fff3cd;
+      border: 2px solid #ffeb3b;
+      border-radius: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      color: #4e342e;
+      text-align: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+    p{
+        text-align: center;
+        font-size: 10px;
+        color: #4e342e;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    🐝 Mica, contrate una abeja para que te lleve una flor 🌻
+    <p> da click en la pantalla para despertar a la abejita...</p>
+  </header>
+
+  <div class="abeja">
+    <div class="ojo izquierdo"></div>
+    <div class="ojo derecho"></div>
+  </div>
+  <div class="flor">
+    <div class="cabeza">
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+      <div class="centro"></div>
+    </div>
+    <div class="tallo"></div>
+    <div class="mensaje">¡La abeja encontró su girasol!</div>
+  </div>
+
+  <script>
+    const abeja = document.querySelector('.abeja');
+    const flor = document.querySelector('.flor');
+
+    document.body.addEventListener('click', () => {
+      abeja.style.animationPlayState = 'running';
+    });
+
+    abeja.addEventListener('animationend', () => {
+      flor.style.opacity = 1;
+    });
+  </script>
+</body>
+</html>
